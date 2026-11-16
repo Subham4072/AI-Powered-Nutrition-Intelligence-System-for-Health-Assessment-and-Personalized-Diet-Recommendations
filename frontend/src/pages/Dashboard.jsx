@@ -127,6 +127,7 @@ export default function Dashboard() {
           {NUTRITION_OVERVIEW.map((item) => (
             <StatCard
               key={item.id}
+              id={item.id}
               icon={STAT_ICONS[item.id]}
               label={item.label}
               current={item.current}
