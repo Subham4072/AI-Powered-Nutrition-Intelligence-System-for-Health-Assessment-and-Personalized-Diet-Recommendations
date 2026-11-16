@@ -46,7 +46,7 @@ export default function Navbar({ pageTitle, onMenuClick }) {
 
           <div className="min-w-0">
             <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400">
-              <span className="hover:text-[#176B38] transition-colors cursor-default">NutriPulse AI</span>
+              <span className="hover:text-[#176B38] transition-colors cursor-default">Vitanex AI</span>
               <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
               <span className="text-[#176B38] font-semibold truncate">{pageTitle}</span>
             </div>

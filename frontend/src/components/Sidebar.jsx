@@ -8,11 +8,11 @@ import {
   ClipboardList,
   FileHeart,
   Sparkles,
-  Leaf,
   CalendarDays,
   LineChart,
   X,
 } from 'lucide-react';
+import VitanexLogo from './VitanexLogo';
 
 export const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -57,20 +57,14 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* Brand Header */}
-        <div className="flex items-center justify-between gap-3 px-6 py-6 border-b border-[#176B38]/30 relative z-10 shrink-0">
-          <div className="flex items-center gap-3.5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#176B38] to-[#258548] text-white shadow-lg ring-1 ring-white/20">
-              <Leaf className="h-6 w-6 text-[#DDF5D9]" />
-            </div>
-            <div>
-              <span className="block text-lg font-bold tracking-tight text-white font-display">
-                NutriPulse AI
-              </span>
-              <span className="block text-[11px] font-medium text-[#DDF5D9]/80 tracking-wide">
-                Nutrition Intelligence
-              </span>
-            </div>
-          </div>
+        <div className="flex items-center justify-between gap-3 px-5 py-5 sm:px-6 sm:py-6 border-b border-[#176B38]/30 relative z-10 shrink-0">
+          <VitanexLogo
+            size="h-12 w-12"
+            withText={true}
+            showSubtitle={true}
+            variant="badge"
+            className="transition-transform duration-200 hover:scale-105"
+          />
 
           <button
             type="button"

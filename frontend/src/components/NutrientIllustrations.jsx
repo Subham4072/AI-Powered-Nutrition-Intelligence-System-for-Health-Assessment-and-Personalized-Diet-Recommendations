@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * Modern 3D-styled Nutrient Illustrations for NutriPulse AI
+ * Modern 3D-styled Nutrient Illustrations for Vitanex AI
  * Designed with rich SVG gradients, smooth volumetric depth, and micro-interactions.
  */
 
