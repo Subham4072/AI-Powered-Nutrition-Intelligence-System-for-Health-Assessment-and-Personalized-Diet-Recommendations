@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bell, Calendar, Menu, ChevronRight } from 'lucide-react';
+import { Bell, Calendar, Menu, ChevronRight, Sparkles } from 'lucide-react';
 import { SAMPLE_NOTIFICATIONS, USER_PROFILE } from '../data/mockData';
 
 export default function Navbar({ pageTitle, onMenuClick }) {
@@ -31,14 +31,14 @@ export default function Navbar({ pageTitle, onMenuClick }) {
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200/80 px-4 sm:px-6 lg:px-8 py-3.5">
+    <header className="sticky top-0 z-30 bg-[#FAF8F0]/85 backdrop-blur-md border-b border-[#176B38]/10 px-4 sm:px-6 lg:px-8 py-3.5 transition-colors">
       <div className="flex items-center justify-between gap-4">
-        {/* Left: Hamburger & Breadcrumb / Page Title */}
+        {/* Left: Mobile Toggle & Breadcrumb / Page Title */}
         <div className="flex items-center gap-3 min-w-0">
           <button
             type="button"
             onClick={onMenuClick}
-            className="inline-flex items-center justify-center rounded-xl p-2 text-slate-600 hover:bg-[#F8FAF7] hover:text-[#166534] lg:hidden transition-colors"
+            className="inline-flex items-center justify-center rounded-2xl p-2.5 text-[#202B25] hover:bg-[#DDF5D9]/60 hover:text-[#176B38] lg:hidden transition-colors"
             aria-label="Open navigation menu"
           >
             <Menu className="h-5 w-5" />
@@ -46,45 +46,47 @@ export default function Navbar({ pageTitle, onMenuClick }) {
 
           <div className="min-w-0">
             <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400">
-              <span>NutriPulse</span>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="text-[#166534] font-medium truncate">{pageTitle}</span>
+              <span className="hover:text-[#176B38] transition-colors cursor-default">NutriPulse AI</span>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+              <span className="text-[#176B38] font-semibold truncate">{pageTitle}</span>
             </div>
-            <h1 className="text-lg sm:text-xl font-bold text-[#1E293B] truncate">{pageTitle}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#202B25] font-display tracking-tight truncate">
+              {pageTitle}
+            </h1>
           </div>
         </div>
 
-        {/* Right: Date, Notification Bell, User Info */}
+        {/* Right: Date, Notification Bell, User Profile Pill */}
         <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-          {/* Current Date */}
-          <div className="hidden md:flex items-center gap-2 rounded-xl bg-[#F8FAF7] border border-slate-200/70 px-3 py-1.5 text-xs font-medium text-slate-600">
-            <Calendar className="h-3.5 w-3.5 text-[#166534]" />
+          {/* Current Date Pill */}
+          <div className="hidden md:flex items-center gap-2 rounded-2xl bg-white/80 border border-[#176B38]/10 px-3.5 py-2 text-xs font-semibold text-[#202B25] shadow-sm">
+            <Calendar className="h-3.5 w-3.5 text-[#176B38]" />
             <span>{formattedDate}</span>
           </div>
 
-          {/* Notification Icon (UI only) */}
+          {/* Notification Icon (UI Popover) */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setNotifOpen((prev) => !prev)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-slate-600 hover:bg-[#F8FAF7] hover:text-[#166534] transition-colors"
+              className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-[#176B38]/15 bg-white/90 text-[#202B25] hover:bg-[#DDF5D9]/50 hover:text-[#176B38] shadow-sm transition-all duration-200"
               aria-label="View notifications"
             >
               <Bell className="h-4.5 w-4.5" />
               {unreadCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 flex h-2 w-2 rounded-full bg-[#10B981] ring-2 ring-white" />
+                <span className="absolute top-2 right-2 flex h-2 w-2 rounded-full bg-[#176B38] ring-2 ring-white animate-pulse" />
               )}
             </button>
 
             {notifOpen && (
-              <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden z-40">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
-                  <span className="text-sm font-bold text-[#1E293B]">Notifications</span>
+              <div className="absolute right-0 mt-2 w-80 rounded-3xl bg-white/95 backdrop-blur-md border border-[#176B38]/15 shadow-2xl overflow-hidden z-40">
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-100 bg-[#FAF8F0]">
+                  <span className="text-sm font-bold text-[#202B25]">Notifications</span>
                   {unreadCount > 0 ? (
                     <button
                       type="button"
                       onClick={markAllRead}
-                      className="text-xs font-semibold text-[#166534] hover:text-[#10B981] transition-colors"
+                      className="text-xs font-semibold text-[#176B38] hover:underline transition-colors"
                     >
                       Mark all read
                     </button>
@@ -96,15 +98,15 @@ export default function Navbar({ pageTitle, onMenuClick }) {
                   {notifications.map((item) => (
                     <div
                       key={item.id}
-                      className={`px-4 py-3 transition-colors ${
-                        item.unread ? 'bg-[#F8FAF7]' : 'bg-white'
+                      className={`px-5 py-3.5 transition-colors ${
+                        item.unread ? 'bg-[#DDF5D9]/20' : 'bg-white'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-xs font-semibold text-[#1E293B]">{item.title}</p>
+                        <p className="text-xs font-bold text-[#202B25]">{item.title}</p>
                         <span className="text-[10px] text-slate-400 shrink-0">{item.time}</span>
                       </div>
-                      <p className="mt-1 text-xs text-slate-500 leading-relaxed">{item.message}</p>
+                      <p className="mt-1 text-xs text-slate-600 leading-relaxed">{item.message}</p>
                     </div>
                   ))}
                 </div>
@@ -112,16 +114,17 @@ export default function Navbar({ pageTitle, onMenuClick }) {
             )}
           </div>
 
-          {/* User Info */}
-          <div className="flex items-center gap-2.5 pl-1 sm:pl-2 sm:border-l border-slate-200">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCFCE7] text-[#166534] text-sm font-bold border border-emerald-200/70">
+          {/* User Profile Summary */}
+          <div className="flex items-center gap-3 pl-2 sm:pl-3 sm:border-l border-[#176B38]/15">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DDF5D9] text-[#176B38] text-sm font-bold border border-[#176B38]/20 shadow-sm">
               S
             </div>
             <div className="hidden sm:block text-left">
-              <p className="text-sm font-semibold text-[#1E293B] leading-tight">
+              <p className="text-sm font-bold text-[#202B25] leading-tight">
                 {USER_PROFILE.name}
               </p>
-              <p className="text-[11px] text-slate-500 leading-tight mt-0.5">
+              <p className="text-[11px] font-medium text-[#176B38] leading-tight mt-0.5 flex items-center gap-1">
+                <Sparkles className="h-2.5 w-2.5" />
                 {USER_PROFILE.shortGoal}
               </p>
             </div>
@@ -131,4 +134,3 @@ export default function Navbar({ pageTitle, onMenuClick }) {
     </header>
   );
 }
-

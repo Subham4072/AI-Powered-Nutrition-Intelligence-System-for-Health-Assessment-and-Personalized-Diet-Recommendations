@@ -36,31 +36,31 @@ export function ToastProvider({ children }) {
           return (
             <div
               key={toast.id}
-              className="pointer-events-auto flex items-start gap-3 rounded-xl bg-white p-4 shadow-lg border border-slate-200/80 transition-all duration-300"
+              className="pointer-events-auto flex items-start gap-3 rounded-2xl card-floating bg-white/95 p-4 shadow-xl border border-[#176B38]/15 backdrop-blur-md transition-all duration-300"
             >
               <div
-                className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
+                className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${
                   isSuccess
-                    ? 'bg-[#DCFCE7] text-[#166534]'
+                    ? 'bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/15'
                     : isInfo
-                    ? 'bg-emerald-50 text-[#10B981]'
-                    : 'bg-amber-50 text-amber-600'
+                    ? 'bg-[#EAF2DF] text-[#176B38] border border-[#176B38]/15'
+                    : 'bg-[#FEF3C7] text-[#92400E] border border-[#F59E0B]/20'
                 }`}
               >
                 <Icon className="h-4 w-4" />
               </div>
               <div className="flex-1 min-w-0">
                 {toast.title && (
-                  <p className="text-sm font-semibold text-[#1E293B]">{toast.title}</p>
+                  <p className="text-sm font-bold text-[#202B25] font-display">{toast.title}</p>
                 )}
                 {toast.message && (
-                  <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{toast.message}</p>
+                  <p className="text-xs text-[#617268] mt-0.5 leading-relaxed">{toast.message}</p>
                 )}
               </div>
               <button
                 type="button"
                 onClick={() => removeToast(toast.id)}
-                className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+                className="rounded-lg p-1 text-[#617268] hover:bg-[#DDF5D9]/70 hover:text-[#176B38] transition-colors"
                 aria-label="Dismiss notification"
               >
                 <X className="h-4 w-4" />
@@ -80,4 +80,3 @@ export function useToast() {
   }
   return ctx;
 }
-

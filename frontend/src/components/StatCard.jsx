@@ -3,23 +3,23 @@ import ProgressBar from './ProgressBar';
 
 const ACCENT_STYLES = {
   emerald: {
-    iconBg: 'bg-[#DCFCE7] text-[#166534]',
-    badge: 'bg-emerald-50 text-[#166534]',
+    iconBg: 'bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/15',
+    badge: 'bg-[#DDF5D9]/80 text-[#176B38] border border-[#176B38]/20',
     bar: 'emerald',
   },
   forest: {
-    iconBg: 'bg-[#DCFCE7] text-[#166534]',
-    badge: 'bg-[#DCFCE7] text-[#166534]',
+    iconBg: 'bg-[#176B38] text-white shadow-sm',
+    badge: 'bg-[#176B38]/10 text-[#176B38] border border-[#176B38]/20',
     bar: 'forest',
   },
   teal: {
-    iconBg: 'bg-teal-50 text-teal-700',
-    badge: 'bg-teal-50 text-teal-700',
+    iconBg: 'bg-[#CCFBF1] text-[#0F766E] border border-[#0F766E]/20',
+    badge: 'bg-[#CCFBF1]/80 text-[#0F766E] border border-[#0F766E]/20',
     bar: 'teal',
   },
   amber: {
-    iconBg: 'bg-amber-50 text-amber-700',
-    badge: 'bg-amber-50 text-amber-700',
+    iconBg: 'bg-[#FEF3C7] text-[#92400E] border border-[#F59E0B]/20',
+    badge: 'bg-[#FEF3C7]/80 text-[#92400E] border border-[#F59E0B]/20',
     bar: 'amber',
   },
 };
@@ -43,43 +43,47 @@ export default function StatCard({
       : 0;
 
   return (
-    <div className="group rounded-2xl bg-white p-5 border border-slate-200/70 shadow-sm hover:shadow-md hover:border-emerald-200/80 transition-all duration-200">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          {Icon && (
-            <div
-              className={`flex h-10 w-10 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105 ${styles.iconBg}`}
-            >
-              <Icon className="h-5 w-5" />
-            </div>
-          )}
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{label}</p>
-            <div className="mt-0.5 flex items-baseline gap-1.5">
-              <span className="text-2xl font-bold tracking-tight text-[#1E293B]">
-                {current.toLocaleString()}
-              </span>
-              <span className="text-xs font-medium text-slate-400">
-                / {target.toLocaleString()} {unit}
-              </span>
+    <div className="card-floating rounded-2xl p-5 group flex flex-col justify-between">
+      <div>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            {Icon && (
+              <div
+                className={`flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-sm ${styles.iconBg}`}
+              >
+                <Icon className="h-5 w-5" />
+              </div>
+            )}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#617268]">{label}</p>
+              <div className="mt-0.5 flex items-baseline gap-1.5">
+                <span className="text-2xl font-extrabold tracking-tight text-[#202B25] font-display">
+                  {current.toLocaleString()}
+                </span>
+                <span className="text-xs font-medium text-[#617268]/80">
+                  / {target.toLocaleString()} {unit}
+                </span>
+              </div>
             </div>
           </div>
+          <span
+            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${styles.badge}`}
+          >
+            {computedPct}%
+          </span>
         </div>
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${styles.badge}`}
-        >
-          {computedPct}%
-        </span>
-      </div>
 
-      <div className="mt-4">
-        <ProgressBar value={current} max={target} color={styles.bar} height="h-2" />
+        <div className="mt-4">
+          <ProgressBar value={current} max={target} color={styles.bar} height="h-2" />
+        </div>
       </div>
 
       {subtitle && (
-        <p className="mt-2.5 text-xs text-slate-500">{subtitle}</p>
+        <p className="mt-3 text-xs text-[#617268] font-medium flex items-center gap-1.5 pt-2 border-t border-[#176B38]/5">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#176B38]/40" />
+          {subtitle}
+        </p>
       )}
     </div>
   );
 }
-

@@ -11,6 +11,7 @@ import {
   Coffee,
   Moon,
   Trash2,
+  Sparkles,
 } from 'lucide-react';
 import Modal from '../components/Modal';
 import ProgressBar from '../components/ProgressBar';
@@ -114,19 +115,23 @@ export default function FoodDiary() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       {/* Top Toolbar: Date Selector & Add Food Button */}
-      <section className="rounded-2xl bg-white p-5 border border-slate-200/70 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section className="card-floating rounded-3xl p-6 border border-[#176B38]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold text-[#1E293B]">Daily Meal Log</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Track daily food entries, calories, and macronutrient totals
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-[#DDF5D9] px-3 py-0.5 text-xs font-bold text-[#176B38] border border-[#176B38]/15 mb-2">
+            <Sparkles className="h-3 w-3" />
+            <span>Daily Log</span>
+          </div>
+          <h2 className="text-xl font-extrabold text-[#202B25] font-display">Daily Meal Log</h2>
+          <p className="text-xs text-[#617268] mt-0.5">
+            Track daily natural food entries, calories, and macronutrient totals
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-[#F8FAF7] px-3 py-2">
-            <Calendar className="h-4 w-4 text-[#166534]" />
+          <div className="flex items-center gap-2 rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3.5 py-2 shadow-2xs">
+            <Calendar className="h-4 w-4 text-[#176B38]" />
             <input
               type="date"
               value={selectedDate}
@@ -138,7 +143,7 @@ export default function FoodDiary() {
                   type: 'info',
                 });
               }}
-              className="bg-transparent text-xs font-semibold text-[#1E293B] focus:outline-none"
+              className="bg-transparent text-xs font-bold text-[#202B25] focus:outline-none"
               aria-label="Select food diary date"
             />
           </div>
@@ -146,7 +151,7 @@ export default function FoodDiary() {
           <button
             type="button"
             onClick={() => handleOpenModal('Breakfast')}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#166534] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-[#14532D] transition-colors"
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#176B38] to-[#1F7A43] hover:from-[#135A2E] hover:to-[#176B38] px-5 py-2.5 text-xs font-bold text-white shadow-md hover:shadow-lg transition-all"
           >
             <Plus className="h-4 w-4" />
             Add Food
@@ -155,96 +160,104 @@ export default function FoodDiary() {
       </section>
 
       {/* Daily Totals Summary Bar */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <div className="rounded-2xl bg-white p-4 border border-slate-200/70 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-500">Total Calories</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#DCFCE7] text-[#166534]">
-              <Flame className="h-4 w-4" />
-            </span>
+      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+        <div className="card-floating rounded-3xl p-5 border border-[#176B38]/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#617268]">Total Calories</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/15">
+                <Flame className="h-4.5 w-4.5" />
+              </span>
+            </div>
+            <p className="mt-2 text-2xl font-extrabold text-[#202B25] font-display">
+              {totals.calories.toLocaleString()}{' '}
+              <span className="text-xs font-medium text-[#617268]">
+                / {NUTRITION_TARGETS.calories.toLocaleString()} kcal
+              </span>
+            </p>
           </div>
-          <p className="mt-2 text-2xl font-bold text-[#1E293B]">
-            {totals.calories.toLocaleString()}{' '}
-            <span className="text-xs font-medium text-slate-400">
-              / {NUTRITION_TARGETS.calories.toLocaleString()} kcal
-            </span>
-          </p>
           <ProgressBar
             value={totals.calories}
             max={NUTRITION_TARGETS.calories}
             color="emerald"
-            height="h-1.5"
-            className="mt-3"
+            height="h-2"
+            className="mt-4"
           />
         </div>
 
-        <div className="rounded-2xl bg-white p-4 border border-slate-200/70 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-500">Protein Total</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#DCFCE7] text-[#166534]">
-              <Beef className="h-4 w-4" />
-            </span>
+        <div className="card-floating rounded-3xl p-5 border border-[#176B38]/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#617268]">Protein Total</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/15">
+                <Beef className="h-4.5 w-4.5" />
+              </span>
+            </div>
+            <p className="mt-2 text-2xl font-extrabold text-[#202B25] font-display">
+              {totals.protein} g{' '}
+              <span className="text-xs font-medium text-[#617268]">
+                / {NUTRITION_TARGETS.protein} g
+              </span>
+            </p>
           </div>
-          <p className="mt-2 text-2xl font-bold text-[#1E293B]">
-            {totals.protein} g{' '}
-            <span className="text-xs font-medium text-slate-400">
-              / {NUTRITION_TARGETS.protein} g
-            </span>
-          </p>
           <ProgressBar
             value={totals.protein}
             max={NUTRITION_TARGETS.protein}
             color="forest"
-            height="h-1.5"
-            className="mt-3"
+            height="h-2"
+            className="mt-4"
           />
         </div>
 
-        <div className="rounded-2xl bg-white p-4 border border-slate-200/70 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-500">Carbohydrates Total</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
-              <Wheat className="h-4 w-4" />
-            </span>
+        <div className="card-floating rounded-3xl p-5 border border-[#176B38]/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#617268]">Carbohydrates Total</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#CCFBF1] text-[#0F766E] border border-[#0F766E]/20">
+                <Wheat className="h-4.5 w-4.5" />
+              </span>
+            </div>
+            <p className="mt-2 text-2xl font-extrabold text-[#202B25] font-display">
+              {totals.carbs} g{' '}
+              <span className="text-xs font-medium text-[#617268]">
+                / {NUTRITION_TARGETS.carbs} g
+              </span>
+            </p>
           </div>
-          <p className="mt-2 text-2xl font-bold text-[#1E293B]">
-            {totals.carbs} g{' '}
-            <span className="text-xs font-medium text-slate-400">
-              / {NUTRITION_TARGETS.carbs} g
-            </span>
-          </p>
           <ProgressBar
             value={totals.carbs}
             max={NUTRITION_TARGETS.carbs}
             color="teal"
-            height="h-1.5"
-            className="mt-3"
+            height="h-2"
+            className="mt-4"
           />
         </div>
 
-        <div className="rounded-2xl bg-white p-4 border border-slate-200/70 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-500">Fat Total</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-700">
-              <Droplets className="h-4 w-4" />
-            </span>
+        <div className="card-floating rounded-3xl p-5 border border-[#176B38]/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#617268]">Healthy Fats Total</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#FEF3C7] text-[#92400E] border border-[#F59E0B]/20">
+                <Droplets className="h-4.5 w-4.5" />
+              </span>
+            </div>
+            <p className="mt-2 text-2xl font-extrabold text-[#202B25] font-display">
+              {totals.fat} g{' '}
+              <span className="text-xs font-medium text-[#617268]">/ {NUTRITION_TARGETS.fat} g</span>
+            </p>
           </div>
-          <p className="mt-2 text-2xl font-bold text-[#1E293B]">
-            {totals.fat} g{' '}
-            <span className="text-xs font-medium text-slate-400">/ {NUTRITION_TARGETS.fat} g</span>
-          </p>
           <ProgressBar
             value={totals.fat}
             max={NUTRITION_TARGETS.fat}
             color="amber"
-            height="h-1.5"
-            className="mt-3"
+            height="h-2"
+            className="mt-4"
           />
         </div>
       </section>
 
       {/* Meal Sections */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         {meals.map((mealGroup) => {
           const MealIcon = MEAL_ICONS[mealGroup.meal] || Sun;
           const mealSubtotal = mealGroup.items.reduce(
@@ -260,25 +273,25 @@ export default function FoodDiary() {
           return (
             <div
               key={mealGroup.id}
-              className="rounded-2xl bg-white border border-slate-200/70 shadow-sm overflow-hidden"
+              className="card-floating rounded-3xl border border-[#176B38]/10 overflow-hidden"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 bg-[#F8FAF7]/80 border-b border-slate-100">
+              <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 bg-[#FAF8F0]/80 border-b border-[#176B38]/10">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCFCE7] text-[#166534]">
-                    <MealIcon className="h-4.5 w-4.5" />
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/15">
+                    <MealIcon className="h-5 w-5" />
                   </span>
                   <div>
-                    <h3 className="text-base font-bold text-[#1E293B]">{mealGroup.meal}</h3>
-                    <p className="text-xs text-slate-400">{mealGroup.time}</p>
+                    <h3 className="text-base font-extrabold text-[#202B25] font-display">{mealGroup.meal}</h3>
+                    <p className="text-xs text-[#617268] font-medium">{mealGroup.time}</p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex items-center gap-2 text-xs">
-                    <span className="rounded-lg bg-white border border-slate-200/70 px-2.5 py-1 font-semibold text-[#166534]">
+                    <span className="rounded-full bg-[#DDF5D9] border border-[#176B38]/15 px-3 py-1 font-bold text-[#176B38]">
                       {mealSubtotal.calories} kcal
                     </span>
-                    <span className="hidden sm:inline-block text-slate-500">
+                    <span className="hidden sm:inline-block text-[#617268] font-medium">
                       P: {mealSubtotal.protein}g &bull; C: {mealSubtotal.carbs}g &bull; F:{' '}
                       {mealSubtotal.fat}g
                     </span>
@@ -286,7 +299,7 @@ export default function FoodDiary() {
                   <button
                     type="button"
                     onClick={() => handleOpenModal(mealGroup.meal)}
-                    className="inline-flex items-center gap-1 rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-[#166534] hover:bg-[#DCFCE7] transition-colors"
+                    className="inline-flex items-center gap-1 rounded-2xl bg-white border border-[#176B38]/20 px-3 py-1.5 text-xs font-bold text-[#176B38] hover:bg-[#DDF5D9]/70 transition-colors shadow-2xs"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     Add
@@ -295,14 +308,14 @@ export default function FoodDiary() {
               </div>
 
               {mealGroup.items.length === 0 ? (
-                <div className="px-6 py-6 text-center text-xs text-slate-400">
-                  No items logged for {mealGroup.meal} yet. Click &ldquo;Add&rdquo; to add a sample food.
+                <div className="px-6 py-8 text-center text-xs text-[#617268]">
+                  No items logged for {mealGroup.meal} yet. Click &ldquo;Add&rdquo; to add a sample whole food.
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <tr className="border-b border-[#176B38]/10 text-[11px] font-bold uppercase tracking-wider text-[#617268] bg-[#FAF8F0]/40">
                         <th className="py-3 px-6">Food Item</th>
                         <th className="py-3 px-4">Serving</th>
                         <th className="py-3 px-4 text-right">Calories</th>
@@ -312,26 +325,29 @@ export default function FoodDiary() {
                         <th className="py-3 px-4 text-right">Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100 text-sm">
+                    <tbody className="divide-y divide-[#176B38]/10 text-sm">
                       {mealGroup.items.map((item) => (
                         <tr
                           key={item.id}
-                          className="hover:bg-[#F8FAF7]/60 transition-colors"
+                          className="hover:bg-[#DDF5D9]/20 transition-colors"
                         >
-                          <td className="py-3.5 px-6 font-semibold text-[#1E293B]">
-                            {item.name}
+                          <td className="py-3.5 px-6 font-bold text-[#202B25]">
+                            <span className="inline-flex items-center gap-2">
+                              <span className="h-2 w-2 rounded-full bg-[#10B981]" />
+                              {item.name}
+                            </span>
                           </td>
-                          <td className="py-3.5 px-4 text-xs text-slate-500">{item.serving}</td>
-                          <td className="py-3.5 px-4 text-right font-semibold text-[#166534]">
+                          <td className="py-3.5 px-4 text-xs text-[#617268]">{item.serving}</td>
+                          <td className="py-3.5 px-4 text-right font-extrabold text-[#176B38]">
                             {item.calories} kcal
                           </td>
-                          <td className="py-3.5 px-4 text-right text-xs text-slate-600">
+                          <td className="py-3.5 px-4 text-right text-xs font-medium text-[#4D5E54]">
                             {item.protein} g
                           </td>
-                          <td className="py-3.5 px-4 text-right text-xs text-slate-600">
+                          <td className="py-3.5 px-4 text-right text-xs font-medium text-[#4D5E54]">
                             {item.carbs} g
                           </td>
-                          <td className="py-3.5 px-4 text-right text-xs text-slate-600">
+                          <td className="py-3.5 px-4 text-right text-xs font-medium text-[#4D5E54]">
                             {item.fat} g
                           </td>
                           <td className="py-3.5 px-4 text-right">
@@ -340,7 +356,7 @@ export default function FoodDiary() {
                               onClick={() =>
                                 handleRemoveFood(mealGroup.id, item.id, item.name)
                               }
-                              className="inline-flex items-center justify-center rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-colors"
+                              className="inline-flex items-center justify-center rounded-xl p-1.5 text-[#617268] hover:bg-rose-50 hover:text-rose-600 transition-colors"
                               aria-label={`Remove ${item.name}`}
                             >
                               <Trash2 className="h-4 w-4" />
@@ -367,7 +383,7 @@ export default function FoodDiary() {
         <form onSubmit={handleAddFood} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="meal" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="meal" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Meal Section
               </label>
               <select
@@ -375,7 +391,7 @@ export default function FoodDiary() {
                 name="meal"
                 value={formData.meal}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3.5 py-2.5 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3.5 py-2.5 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               >
                 <option value="Breakfast">Breakfast</option>
                 <option value="Lunch">Lunch</option>
@@ -385,7 +401,7 @@ export default function FoodDiary() {
             </div>
 
             <div>
-              <label htmlFor="food-name" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="food-name" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Food Name *
               </label>
               <input
@@ -396,13 +412,13 @@ export default function FoodDiary() {
                 placeholder="e.g., Boiled Eggs"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3.5 py-2.5 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3.5 py-2.5 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="serving" className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label htmlFor="serving" className="block text-xs font-bold text-[#202B25] mb-1.5">
               Serving Size
             </label>
             <input
@@ -412,13 +428,13 @@ export default function FoodDiary() {
               placeholder="e.g., 2 whole eggs"
               value={formData.serving}
               onChange={handleInputChange}
-              className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3.5 py-2.5 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+              className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3.5 py-2.5 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <label htmlFor="calories" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="calories" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Calories
               </label>
               <input
@@ -429,11 +445,11 @@ export default function FoodDiary() {
                 placeholder="140"
                 value={formData.calories}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3 py-2 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3 py-2 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               />
             </div>
             <div>
-              <label htmlFor="protein" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="protein" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Protein (g)
               </label>
               <input
@@ -444,11 +460,11 @@ export default function FoodDiary() {
                 placeholder="12"
                 value={formData.protein}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3 py-2 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3 py-2 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               />
             </div>
             <div>
-              <label htmlFor="carbs" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="carbs" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Carbs (g)
               </label>
               <input
@@ -459,11 +475,11 @@ export default function FoodDiary() {
                 placeholder="1"
                 value={formData.carbs}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3 py-2 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3 py-2 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               />
             </div>
             <div>
-              <label htmlFor="fat" className="block text-xs font-semibold text-slate-600 mb-1.5">
+              <label htmlFor="fat" className="block text-xs font-bold text-[#202B25] mb-1.5">
                 Fat (g)
               </label>
               <input
@@ -474,22 +490,22 @@ export default function FoodDiary() {
                 placeholder="10"
                 value={formData.fat}
                 onChange={handleInputChange}
-                className="w-full rounded-xl border border-slate-200 bg-[#F8FAF7] px-3 py-2 text-sm text-[#1E293B] focus:border-[#166534] focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-[#176B38]/20 bg-[#FAF8F0] px-3 py-2 text-sm text-[#202B25] font-medium focus:border-[#176B38] focus:bg-white focus:outline-none"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#176B38]/10">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+              className="rounded-2xl border border-[#176B38]/20 bg-white px-4 py-2 text-xs font-bold text-[#617268] hover:bg-[#FAF8F0] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#166534] px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#14532D] transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-2xl bg-gradient-to-r from-[#176B38] to-[#1F7A43] hover:from-[#135A2E] hover:to-[#176B38] px-5 py-2 text-xs font-bold text-white shadow-md hover:shadow-lg transition-all"
             >
               <Plus className="h-4 w-4" />
               Add Food Item
@@ -500,4 +516,3 @@ export default function FoodDiary() {
     </div>
   );
 }
-
