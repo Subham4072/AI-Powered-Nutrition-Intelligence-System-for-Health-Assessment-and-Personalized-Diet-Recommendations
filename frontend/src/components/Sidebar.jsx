@@ -39,8 +39,8 @@ export default function Sidebar({ isOpen, onClose }) {
 
       {/* Dark Forest-Green Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0F3D20] text-white border-r border-[#176B38]/30 flex flex-col transition-transform duration-300 ease-out lg:static lg:translate-x-0 shrink-0 relative overflow-hidden shadow-2xl ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 z-50 lg:z-40 w-72 h-screen max-h-screen bg-[#0F3D20] text-white border-r border-[#176B38]/30 flex flex-col transition-transform duration-300 ease-out overflow-hidden shadow-2xl ${
+          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Subtle Decorative Botanical Corner Elements inside Sidebar */}
@@ -57,7 +57,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* Brand Header */}
-        <div className="flex items-center justify-between gap-3 px-6 py-6 border-b border-[#176B38]/30 relative z-10">
+        <div className="flex items-center justify-between gap-3 px-6 py-6 border-b border-[#176B38]/30 relative z-10 shrink-0">
           <div className="flex items-center gap-3.5">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#176B38] to-[#258548] text-white shadow-lg ring-1 ring-white/20">
               <Leaf className="h-6 w-6 text-[#DDF5D9]" />
@@ -84,7 +84,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
         {/* Navigation Links */}
         <nav
-          className="flex-1 overflow-y-auto px-4 py-5 space-y-1.5 relative z-10"
+          className="flex-1 overflow-y-auto overscroll-contain px-4 py-5 space-y-1.5 relative z-10"
           aria-label="Main Navigation"
         >
           <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-[#DDF5D9]/60">
@@ -131,7 +131,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </nav>
 
         {/* Healthy Food Bowl Illustration Card at bottom of sidebar */}
-        <div className="p-4 border-t border-[#176B38]/30 relative z-10">
+        <div className="p-4 border-t border-[#176B38]/30 relative z-10 shrink-0">
           <div className="rounded-2xl bg-[#134925]/90 border border-white/10 p-4 shadow-inner relative overflow-hidden">
             <div className="flex items-center gap-3">
               {/* Healthy Food Bowl Illustration */}
