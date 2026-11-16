@@ -26,6 +26,7 @@ import {
   MACRO_DISTRIBUTION_DATA,
   INITIAL_FOOD_DIARY,
 } from '../data/mockData';
+import nutritionCharacterImg from '../assets/nutrition-character.png';
 
 const STAT_ICONS = {
   calories: Flame,
@@ -47,44 +48,74 @@ export default function Dashboard() {
       {/* Welcome Banner & User Summary */}
       <section className="card-floating rounded-3xl p-6 sm:p-7 border border-[#176B38]/10 relative overflow-hidden">
         {/* Subtle decorative leaf accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none text-[#176B38]">
+        <div className="absolute top-0 right-0 w-72 h-72 opacity-5 pointer-events-none text-[#176B38]">
           <svg viewBox="0 0 100 100" fill="currentColor">
             <path d="M50 0 C70 30, 90 40, 100 70 C90 90, 70 100, 50 100 C30 100, 10 90, 0 70 C10 40, 30 30, 50 0 Z" />
           </svg>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative z-10">
-          <div>
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 relative z-10">
+          {/* Left: User Welcome & Metrics Cards */}
+          <div className="flex-1 min-w-0 w-full">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#DDF5D9] px-3.5 py-1 text-xs font-bold text-[#176B38] border border-[#176B38]/15 shadow-2xs">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Goal: {USER_PROFILE.goal}</span>
             </div>
+
             <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-[#202B25] font-display">
               Good Morning, {USER_PROFILE.name}! 🌱
             </h2>
+
             <p className="mt-1.5 text-sm text-[#4D5E54] max-w-xl leading-relaxed">
               Here&apos;s your personalized nutritional overview for today. Your micronutrient and macro balance are currently well aligned.
             </p>
+
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Age</p>
+                <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.age} yrs</p>
+              </div>
+              <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Height</p>
+                <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.heightCm} cm</p>
+              </div>
+              <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Weight</p>
+                <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.weightKg} kg</p>
+              </div>
+              <div className="rounded-2xl bg-[#DDF5D9]/70 border border-[#176B38]/15 px-4 py-3 shadow-2xs">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#176B38]">Preference</p>
+                <p className="text-base font-extrabold text-[#176B38] font-display mt-0.5 truncate">
+                  {USER_PROFILE.dietaryPreference}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0">
-            <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Age</p>
-              <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.age} yrs</p>
+          {/* Right: Modern 2D/3D Nutrition Cartoon Character Illustration */}
+          <div className="relative shrink-0 flex items-center justify-center self-center lg:self-center pt-2 lg:pt-0">
+            {/* Soft botanical glowing halo behind character */}
+            <div
+              className="absolute inset-0 m-auto w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-full bg-gradient-to-tr from-[#DDF5D9]/90 via-[#EAF2DF]/70 to-[#FAF8F0]/40 blur-xl -z-10"
+              aria-hidden="true"
+            />
+
+            {/* Subtle decorative sparkle pill */}
+            <div
+              className="absolute -top-2 right-2 flex items-center justify-center h-7 w-7 rounded-full bg-[#DDF5D9] text-[#176B38] border border-[#176B38]/20 shadow-xs pointer-events-none"
+              aria-hidden="true"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
             </div>
-            <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Height</p>
-              <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.heightCm} cm</p>
-            </div>
-            <div className="rounded-2xl bg-[#FAF8F0]/90 border border-[#176B38]/10 px-4 py-3 shadow-2xs">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#617268]">Weight</p>
-              <p className="text-base font-extrabold text-[#202B25] font-display mt-0.5">{USER_PROFILE.weightKg} kg</p>
-            </div>
-            <div className="rounded-2xl bg-[#DDF5D9]/70 border border-[#176B38]/15 px-4 py-3 shadow-2xs">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#176B38]">Preference</p>
-              <p className="text-base font-extrabold text-[#176B38] font-display mt-0.5">
-                {USER_PROFILE.dietaryPreference}
-              </p>
+
+            {/* Character image holding healthy food bowl */}
+            <div className="relative w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60">
+              <img
+                src={nutritionCharacterImg}
+                alt="Friendly nutrition character enjoying a nutritious bowl of fresh foods"
+                className="w-full h-auto object-contain drop-shadow-[0_14px_28px_rgba(23,107,56,0.12)] select-none pointer-events-none transition-transform duration-300 hover:scale-105"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
